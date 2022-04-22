@@ -31,7 +31,7 @@ def result():
             j += 1
         # end while
 
-        resultf.append(("Total", " ", " ", point_total))
+        resultf.append(("Total", " ", credit_total, point_total))
         resultf.append(("GPA", " ", " ", point_total/credit_total))
 
         return render_template("result.html",result = resultf)
