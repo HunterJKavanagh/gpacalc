@@ -7,9 +7,9 @@ letter_grades = {'A':4, 'B':3, 'C':2, 'D':1, 'F':0, '':0}
 
 @app.route('/')
 def student():
-   return render_template('student.html')
+   return render_template('grades.html')
 
-@app.route('/result',methods = ['POST', 'GET'])
+@app.route('/gpa',methods = ['POST', 'GET'])
 def result():
     if request.method == 'POST':
         result = request.form
@@ -34,7 +34,7 @@ def result():
         resultf.append(("Total", " ", credit_total, point_total))
         resultf.append(("GPA", " ", " ", point_total/credit_total))
 
-        return render_template("result.html",result = resultf)
+        return render_template("gpa.html",result = resultf)
 
 if __name__ == '__main__':
    app.run(host='0.0.0.0', debug = True)
