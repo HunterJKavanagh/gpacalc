@@ -6,11 +6,11 @@ app = Flask(__name__)
 letter_grades = {'A':4, 'B':3, 'C':2, 'D':1, 'F':0, '':0}
 
 @app.route('/')
-def student():
+def gpa():
    return render_template('grades.html')
 
 @app.route('/gpa',methods = ['POST', 'GET'])
-def result():
+def grades():
     if request.method == 'POST':
         result = request.form
         values = list(result.values())
