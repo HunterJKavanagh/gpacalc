@@ -1,5 +1,3 @@
-from ctypes import sizeof
-from logging.config import valid_ident
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
@@ -9,7 +7,7 @@ letter_grades = {'A':4, 'B':3, 'C':2, 'D':1, 'F':0, '':0}
 def gpa():
    return render_template('grades.html')
 
-@app.route('/gpa',methods = ['POST', 'GET'])
+@app.route('/gpa', methods = ['POST', 'GET'])
 def grades():
     if request.method == 'POST':
         result = request.form
@@ -20,7 +18,7 @@ def grades():
         i, j = (0,0)
         point_total, credit_total = (0,0)
         while j <  len(values)/2:
-            if values[i] != '':
+            if values[i] != '' and values[i+1] != '':
                 points = letter_grades[values[i]] * int(values[i+1])
                 point_total += points
                 credit_total += int(values[i+1])
@@ -31,8 +29,9 @@ def grades():
             j += 1
         # end while
 
-        resultf.append(("Total", " ", credit_total, point_total))
-        resultf.append(("GPA", " ", " ", point_total/credit_total))
+        if credit_total > 0:
+            resultf.append(("Total", " ", credit_total, point_total))
+            resultf.append(("GPA", " ", " ", point_total/credit_total))
 
         return render_template("gpa.html",result = resultf)
 
